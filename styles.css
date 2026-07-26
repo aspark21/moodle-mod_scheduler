@@ -96,11 +96,11 @@ div .path-mod-scheduler .appointmentnote {
 }
 
 
-body.path-mod-scheduler input.slotselect {
+body.path-mod-scheduler input.slotselect.form-check-input {
     display: none;
 }
-body.path-mod-scheduler.jsenabled input.slotselect {
-    display: inline;
+body.path-mod-scheduler.jsenabled input.slotselect.form-check-input {
+    display: block;
 }
 
 body.path-mod-scheduler.jsenabled  input.studentselectsubmit {
@@ -119,13 +119,12 @@ body.path-mod-scheduler.jsenabled  input.studentselectsubmit {
 }
 
 .path-mod-scheduler div.schedulelist.halfsize {
-    width: 46%;
+    width: 50%;
     display: inline-table;
     padding: 3px;
 }
 
 .path-mod-scheduler div.schedulelist.fullsize {
-    width: 96%;
     display: block;
     padding: 3px;
 }

@@ -53,7 +53,6 @@ $permissions = new \mod_scheduler\permission\scheduler_permissions($context, $US
 
 // Initialize $PAGE, compute blocks.
 $PAGE->set_url('/mod/scheduler/view.php', ['id' => $cm->id]);
-
 $output = $PAGE->get_renderer('mod_scheduler');
 
 if (groups_get_activity_groupmode($cm) || !$permissions->can_see_all_slots()) {
@@ -64,6 +63,15 @@ if (groups_get_activity_groupmode($cm) || !$permissions->can_see_all_slots()) {
 
 $subpage = optional_param('subpage', $defaultsubpage, PARAM_ALPHA);
 
+if (
+    !($permissions->can_edit_all_slots()) ||
+    $action === 'export' ||
+    $action === 'viewstatistics' ||
+    $action === 'addsession' ||
+    ($action === 'view' && $subpage === 'myappointments')
+) {
+    $PAGE->add_body_class('limitedwidth');
+}
 
 // Print the page header.
 

@@ -121,17 +121,17 @@ switch ($subpage) {
         $allattendees = ($attendees) ? count($attendees) : 0;
 
         $str = '<h3>' . get_string('attendable', 'scheduler') . '</h3>';
-        $str .= '<strong>' . get_string('attendablelbl', 'scheduler') . '</strong>: ' . $allattendees . '<br/>';
+        $str .= '<p><strong>' . get_string('attendablelbl', 'scheduler') . '</strong>: ' . $allattendees . '</p>';
         $str .= '<h3>' . get_string('attended', 'scheduler') . '</h3>';
-        $str .= '<strong>' . get_string('attendedlbl', 'scheduler') . '</strong>: ' . $attended . '<br/><br/>';
+        $str .= '<p><strong>' . get_string('attendedlbl', 'scheduler') . '</strong>: ' . $attended . '</p>';
         $str .= '<h3>' . get_string('unattended', 'scheduler') . '</h3>';
-        $str .= '<strong>' . get_string('registeredlbl', 'scheduler') . '</strong>: ' . $registered . '<br/>';
+        $str .= '<p><strong>' . get_string('registeredlbl', 'scheduler') . '</strong>: ' . $registered . '<br/>';
         $str .= '<strong>' . get_string('unregisteredlbl', 'scheduler') . '</strong>: ' .
-                ($allattendees - $registered - $attended) . '<br/>';
+                ($allattendees - $registered - $attended) . '</p>';
         $str .= '<h3>' . get_string('availableslots', 'scheduler') . '</h3>';
-        $str .= '<strong>' . get_string('availableslotsowned', 'scheduler') . '</strong>: ' . $freeowned . '<br/>';
+        $str .= '<p><strong>' . get_string('availableslotsowned', 'scheduler') . '</strong>: ' . $freeowned . '<br/>';
         $str .= '<strong>' . get_string('availableslotsnotowned', 'scheduler') . '</strong>: ' . $freenotowned . '<br/>';
-        $str .= '<strong>' . get_string('availableslotsall', 'scheduler') . '</strong>: ' . ($freeowned + $freenotowned) . '<br/>';
+        $str .= '<strong>' . get_string('availableslotsall', 'scheduler') . '</strong>: ' . ($freeowned + $freenotowned) . '</p>';
 
         echo $OUTPUT->box($str);
 
@@ -141,9 +141,10 @@ switch ($subpage) {
 
         if (!empty($attendees)) {
             $table = new html_table();
+
+            $table->attributes['class'] = 'table generaltable table-reboot table-hover table-striped';
             $table->head = [get_string('student', 'scheduler'), get_string('duration', 'scheduler')];
             $table->align = ['LEFT', 'CENTER'];
-            $table->width = '70%';
             $table->data = [];
             $sql = '
                 SELECT
@@ -193,7 +194,7 @@ switch ($subpage) {
         $sql .= " GROUP BY s.teacherid";
         if ($statrecords = $DB->get_records_sql($sql, $params)) {
             $table = new html_table();
-            $table->width = '70%';
+            $table->attributes['class'] = 'table generaltable table-reboot table-hover table-striped';
             $table->head = [s($scheduler->get_teacher_name()), get_string('cumulatedduration', 'scheduler')];
             $table->align = ['LEFT', 'CENTER'];
             foreach ($statrecords as $arecord) {
@@ -230,9 +231,9 @@ switch ($subpage) {
         $sql .= " GROUP BY s.starttime ORDER BY groupsize DESC";
         if ($groupslots = $DB->get_records_sql($sql, $params)) {
             $table = new html_table();
+            $table->attributes['class'] = 'table generaltable table-reboot table-hover table-striped';
             $table->head = [get_string('duration', 'scheduler'), get_string('appointments', 'scheduler')];
             $table->align = ['LEFT', 'CENTER'];
-            $table->width = '70%';
 
             $durationcount = [];
             foreach ($groupslots as $slot) {
@@ -276,11 +277,12 @@ switch ($subpage) {
                   ORDER BY groupsize DESC";
         if ($groupslots = $DB->get_records_sql($sql, $params)) {
             $table = new html_table();
+            $table->attributes['class'] = 'table generaltable table-reboot table-hover table-striped';
             $table->head = [get_string('groupsize', 'scheduler'), get_string('occurrences', 'scheduler'),
                                    get_string('cumulatedduration', 'scheduler'), ];
             $table->align = ['LEFT', 'CENTER', 'CENTER'];
-            $table->width = '70%';
             $grouprows = [];
+
             foreach ($groupslots as $agroup) {
                 if (!array_key_exists($agroup->groupsize, $grouprows)) {
                     $grouprows[$agroup->groupsize] = new stdClass();

@@ -416,6 +416,7 @@ class mod_scheduler_renderer extends plugin_renderer_base
      */
     public function render_scheduler_slot_table(scheduler_slot_table $slottable) {
         $table = new html_table();
+        $table->attributes['class'] = 'table generaltable table-reboot table-hover table-striped';
 
         if ($slottable->showslot) {
             $table->head  = [get_string('date', 'scheduler')];
@@ -610,7 +611,7 @@ class mod_scheduler_renderer extends plugin_renderer_base
                             $student->entryid,
                             $student->checked,
                             '',
-                            ['class' => 'studentselect']
+                            ['class' => 'studentselect form-check-input']
                         );
                     } else {
                         $img = $student->checked ? 'ticked' : 'unticked';
@@ -684,6 +685,7 @@ class mod_scheduler_renderer extends plugin_renderer_base
                         get_string('groupsession', 'scheduler'), '', ];
         $table->align = ['left', 'left', 'left', 'left', 'left', 'left', 'left', 'left'];
         $table->id = 'slotbookertable';
+        $table->attributes['class'] = 'table generaltable table-reboot table-hover table-striped';
         $table->data = [];
 
         $previousdate = '';
@@ -822,6 +824,7 @@ class mod_scheduler_renderer extends plugin_renderer_base
         $o = '';
 
         $table = new html_table();
+        $table->attributes['class'] = 'table generaltable table-reboot table-hover table-striped';
         $table->head  = ['', get_string('date', 'scheduler'), get_string('start', 'scheduler'),
                         get_string('end', 'scheduler'), get_string('location', 'scheduler'), get_string('students', 'scheduler'), ];
         $table->align = ['center', 'left', 'left', 'left', 'left', 'left'];
@@ -834,6 +837,7 @@ class mod_scheduler_renderer extends plugin_renderer_base
         $table->align[] = 'center';
 
         $table->id = 'slotmanager';
+        $table->attributes['class'] = 'table generaltable table-reboot table-hover table-striped';
         $table->data = [];
 
         $previousdate = '';
@@ -843,7 +847,13 @@ class mod_scheduler_renderer extends plugin_renderer_base
         foreach ($slotman->slots as $slot) {
             $rowdata = [];
 
-            $selectbox = html_writer::checkbox('selectedslot[]', $slot->slotid, false, '', ['class' => 'slotselect']);
+            $selectbox = html_writer::checkbox(
+                'selectedslot[]',
+                $slot->slotid,
+                false,
+                '',
+                ['class' => 'slotselect form-check-input']
+            );
             $rowdata[] = $slot->editable ? $selectbox : '';
 
             $startdate = $this->userdate($slot->starttime);
@@ -964,6 +974,7 @@ class mod_scheduler_renderer extends plugin_renderer_base
 
         $mtable = new html_table();
 
+        $mtable->attributes['class'] = 'table generaltable table-reboot table-hover table-striped';
         $mtable->id = $list->id;
         $mtable->head = ['', get_string('name')];
         $mtable->align = ['center', 'left'];
@@ -1089,6 +1100,7 @@ class mod_scheduler_renderer extends plugin_renderer_base
         $o .= $this->output->box_start('boxaligncenter appointmentinfotable');
 
         $t = new html_table();
+        $t->attributes['class'] = 'table generaltable table-reboot table-hover table-striped';
 
         if ($ai->showslotinfo) {
             $row = new html_table_row();

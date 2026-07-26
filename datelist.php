@@ -209,7 +209,7 @@ if ($numrecords) {
     $table->column_suppress('notes');
 
     $table->set_attribute('id', 'dates');
-    $table->set_attribute('class', 'datelist');
+    $table->set_attribute('class', 'table flexible table-reboot table-hover table-striped datelist mb-3');
 
     $table->column_class('course', 'datelist_course');
     $table->column_class('scheduler', 'datelist_scheduler');
